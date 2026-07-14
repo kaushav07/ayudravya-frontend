@@ -23,6 +23,8 @@ import { Orders } from "./pages/Orders";
 import { OrderDetail } from "./pages/OrderDetail";
 import { PaymentSuccess } from "./pages/PaymentSuccess";
 import { PaymentFailure } from "./pages/PaymentFailure";
+import ForgotPassword from "./pages/ForgotPassword";
+import OTPComponent from "./pages/OTPComponent";
 
 export default function App() {
   return (
@@ -45,6 +47,8 @@ export default function App() {
               <Route path="/account" element={<Account />} />
               <Route path="/account/addresses" element={<Addresses />} />
               <Route path="/orders" element={<Orders />} />
+              <Route path='/forgot-password' element={<ForgotPassword/>}/>
+              <Route path='/forgot-password/otp' element={<OTPComponent/>}/>
               <Route path="/orders/:id" element={<OrderDetail />} />
               <Route path="/payment/success" element={<PaymentSuccess />} />
               <Route path="/payment/failure" element={<PaymentFailure />} />
