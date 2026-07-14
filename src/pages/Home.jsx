@@ -20,6 +20,37 @@ import { Loader } from "../components/Loader";
 import Carousel from "../components/Carousel";
 import ProductSlider from "../components/ProductSlider";
 
+const CUSTOMER_REVIEWS=[
+      {
+        id:1,
+        name:"ABC",
+        rating:"*****",
+        location:"Delhi",
+        review:"Good collection of healthcare products. The cart process is smooth and product details are easy to understand.",
+      },
+      {
+        id:2,
+        name:"ABC",
+        Rating:"5 Star",
+        location:"Delhi",
+        review:"Good collection of healthcare products. The cart process is smooth and product details are easy to understand.",
+      },
+      {
+        id:3,
+        name:"ABC",
+        rating:"5 Star",
+        location:"Delhi",
+        review:"Good collection of healthcare products. The cart process is smooth and product details are easy to understand.",
+      },
+      {
+        id:4,
+        name:"ABC",
+        rating:"5 Star",
+        location:"Delhi",
+        review:"Good collection of healthcare products. The cart process is smooth and product details are easy to understand.",
+      },
+    ];
+
 export const Home = () => {
   const [products, setProducts] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -174,7 +205,123 @@ export const Home = () => {
         </div>
       </section>
       */}
-     
+
+    {/*About Section */}
+    <section className="about-ayudravya-section py-5" id="about">
+        <div className="container1">
+          <div className="about-ayudravya-wrapper">
+            <div className="row align-items-center g-5">
+              <div className="col-lg-7">
+                <div className="about-content">
+                  <span className="about-small-label">
+                    About Ayudravya
+                  </span>
+                  
+                  <h2 className="about-main-heading">
+                    Your trusted destination for healthcare, wellness, and daily care
+                    essentials
+                 </h2>
+                 
+                 <p className="about-main-text">
+                  Ayudravya is an online healthcare and wellness store designed to
+                  make essential health products easy to discover, compare, and
+                  purchase from one reliable platform. We bring together wellness
+                  supplements, skincare products, vitamins, personal care essentials,
+                  fitness nutrition, and everyday healthcare items.
+                </p>
+                
+                <p className="about-main-text">
+                  Our focus is to offer a clean shopping experience with clear
+                  product details, transparent pricing, easy category browsing, and a
+                  smooth cart flow so customers can shop with confidence.
+                </p>
+                
+                <div className="about-highlight-row">
+                  <div className="about-highlight-box">
+                    <i className="bi bi-shield-check"></i>
+                    <span>Trusted Products</span>
+                  </div>
+                  
+                  <div className="about-highlight-box">
+                    <i className="bi bi-bag-check"></i>
+                    <span>Easy Shopping</span>
+                  </div>
+                  
+                  <div className="about-highlight-box">
+                    <i className="bi bi-heart-pulse"></i>
+                    <span>Wellness Focused</span>
+                  </div>
+                  
+                </div>
+                
+                <div className="about-action-row">
+                  <Link to="/products" className="btn about-shop-btn">
+                  Explore Products
+                  </Link>
+                  
+                  <Link to="/about" className="btn about-learn-btn">
+                  Learn More
+                  </Link>
+                </div>
+              </div>
+            </div>
+            
+            <div className="col-lg-5">
+              <div className="about-premium-card">
+                <div className="about-card-icon">
+                  <i className="bi bi-capsule"></i>
+                </div>
+                
+                <h4>
+                  Why choose Ayudravya?
+                </h4>
+                
+                <p>
+                  A simple, trustworthy, and wellness-focused shopping experience
+                  built for modern healthcare needs.
+                </p>
+                
+                <ul className="about-check-list">
+                  <li>
+                    <span>✓</span>
+                    Genuine healthcare and wellness products
+                  </li>
+                  
+                  <li>
+                    <span>✓</span>
+                    Easy product search and category browsing
+                  </li>
+                  
+                  <li>
+                    <span>✓</span>
+                    Clear pricing, product details, and pack information
+                  </li>
+                  
+                  <li>
+                    <span>✓</span>
+                    Smooth cart and checkout experience
+                  </li>
+                  
+                  <li>
+                    <span>✓</span>
+                    Clean, user-friendly, and reliable platform
+                  </li>
+                </ul>
+                
+                <div className="about-card-bottom">
+                  <div>
+                    <strong>Ayudravya</strong>
+                    <small>Healthcare made simple</small>
+                  </div>
+                  
+                  <i className="bi bi-arrow-right-circle"></i>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
 
       {/* Prominent Product Display Section */}
       <section className="py-5" style={{ backgroundColor: "#fdfcfb" }}>
@@ -209,6 +356,72 @@ export const Home = () => {
               ))}
             </div>
           )}
+        </div>
+      </section>
+
+      {/*Customer-reviews*/}
+
+      <section className="customer-reviews-section py-5">
+        <div className="container">
+          <div className="reviews-wrapper">
+            <div className="reviews-heading text-center">
+              <span className="reviews-label">
+                Customer Reviews
+              </span>
+              
+              <h2>
+                What Our Customers Say
+              </h2>
+              
+              <p>
+                Trusted by customers for genuine healthcare products, easy ordering,
+                clear product details, and a smooth wellness shopping experience.
+              </p>
+            </div>
+            
+            <div className="row g-4 justify-content-center">
+              {CUSTOMER_REVIEWS.map((review) => (
+                <div className="col-md-6 col-lg-3" key={review.id}>
+                  <article className="review-card h-100">
+                    <div className="review-quote">
+                      “
+                    </div>
+                    
+                    <div className="review-rating">
+                      {Array.from({ length: 5 }).map((_, index) => (
+                        <span
+                        key={index}
+                        className={index < review.rating ? "star-filled" : "star-empty"} style={{color:"#FF9529"}}
+                        >
+                          ★
+                        </span>
+                      ))}
+                    </div>
+                    
+                    <p className="review-text">
+                      “{review.review}”
+                    </p>
+                    
+                    <div className="review-user">
+                      <div className="review-avatar">
+                        {review.name.charAt(0)}
+                      </div>
+                      
+                      <div>
+                        <h6>
+                          {review.name}
+                        </h6>
+                        
+                        <small>
+                          {review.location}
+                        </small>
+                      </div>
+                    </div>
+                  </article>
+                </div>
+              ))}
+            </div>
+          </div>
         </div>
       </section>
 
@@ -271,3 +484,5 @@ export const Home = () => {
     </div>
   );
 };
+
+

@@ -88,7 +88,9 @@ function ProductSlider() {
                 </Swiper>
             </div>
         </section>
+        
     );
 }
-
+ 
 export default ProductSlider;
+
