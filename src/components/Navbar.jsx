@@ -5,6 +5,13 @@
 
 import React, { useState } from "react";
 import { Link, NavLink, useNavigate } from "react-router-dom";
+import logo from '../assets/logo.png'
+import { RxHamburgerMenu } from "react-icons/rx";
+{/* */ }
+import { FaCartShopping } from "react-icons/fa6";
+import { RxCross1 } from "react-icons/rx";
+
+{/* */ }
 import {
   ShoppingBag,
   User as UserIcon,
@@ -14,6 +21,7 @@ import {
   LogOut,
 } from "lucide-react";
 import { useApp } from "../store/AppContext";
+import { button, nav } from "motion/react-client";
 
 export const Navbar = () => {
   const { user, cart, logout } = useApp();
@@ -27,182 +35,106 @@ export const Navbar = () => {
     await logout();
     navigate("/");
   };
-
+  const redirectToCart = () => {
+    navigate('/cart')
+  }
   return (
-    <nav
-      className="navbar navbar-expand-lg bg-white border-bottom sticky-top py-3"
-      id="main-navigation"
-    >
-      <div className="container">
-        {/* Brand */}
-        <Link
-          className="navbar-brand d-flex align-items-center text-dark text-decoration-none"
-          to="/"
-        >
-          <span
-            className="font-serif italic tracking-tight"
-            style={{
-              color: "var(--primary-color)",
-              fontSize: "1.75rem",
-              fontWeight: 600,
-            }}
-          >
-            Ayudravya
-          </span>
-        </Link>
-
-        {/* Mobile Toggle */}
-        <button
-          className="navbar-toggler border-0 p-1"
-          type="button"
-          onClick={() => setIsOpen(!isOpen)}
-          aria-controls="navbar-content"
-          aria-expanded={isOpen}
-          aria-label="Toggle navigation"
-        >
-          {isOpen ? (
-            <X size={24} className="text-dark" />
-          ) : (
-            <Menu size={24} className="text-dark" />
-          )}
-        </button>
-
-        {/* Links */}
-        <div
-          className={`collapse navbar-collapse ${isOpen ? "show" : ""}`}
-          id="navbar-content"
-        >
-          <ul className="navbar-nav me-auto mb-2 mb-lg-0 ms-lg-4 gap-2 gap-lg-1">
-            <li className="nav-item">
-              <NavLink
-                to="/"
-                className={({ isActive }) =>
-                  `nav-link px-3 py-1.5 fw-medium small rounded-2 ${isActive ? "bg-light text-success" : "text-secondary hover:text-dark"}`
-                }
-                end
-              >
-                Home
-              </NavLink>
-            </li>
-            <li className="nav-item">
-              <NavLink
-                to="/products"
-                className={({ isActive }) =>
-                  `nav-link px-3 py-1.5 fw-medium small rounded-2 ${isActive ? "bg-light text-success" : "text-secondary hover:text-dark"}`
-                }
-              >
-                Shop Products
-              </NavLink>
-            </li>
-            {user && (
-              <li className="nav-item">
-                <NavLink
-                  to="/orders"
-                  className={({ isActive }) =>
-                    `nav-link px-3 py-1.5 fw-medium small rounded-2 ${isActive ? "bg-light text-success" : "text-secondary hover:text-dark"}`
-                  }
-                >
-                  My Orders
-                </NavLink>
-              </li>
-            )}
-          </ul>
-
-          {/* Actions */}
-          <div className="d-flex align-items-center gap-3 mt-3 mt-lg-0">
-            {/* Cart Icon */}
-            <Link
-              to="/cart"
-              className="position-relative text-dark p-2 rounded-circle hover-bg-light"
-              aria-label="Shopping Cart"
-            >
-              <ShoppingBag
-                size={21}
-                className="text-secondary hover:text-dark"
-              />
-              {cartCount > 0 && (
-                <span
-                  className="position-absolute top-0 start-100 translate-middle badge rounded-pill"
-                  style={{
-                    backgroundColor: "var(--primary-color)",
-                    fontSize: "0.65rem",
-                    padding: "3px 6px",
-                    border: "2px solid white",
-                  }}
-                >
-                  {cartCount}
-                </span>
-              )}
-            </Link>
-
-            {/* Auth section */}
-            {user ? (
-              <div className="dropdown d-inline-block">
-                <button
-                  className="btn btn-light dropdown-toggle d-flex align-items-center gap-2 px-3 py-2 border rounded-pill"
-                  type="button"
-                  id="userDropdown"
-                  data-bs-toggle="dropdown"
-                  aria-expanded="false"
-                  onClick={() => navigate("/account")}
-                >
-                  <UserIcon size={16} className="text-success" />
-                  <span className="small fw-medium text-dark">
-                    {user.full_name.split(" ")[0]}
-                  </span>
-                </button>
-                <ul
-                  className="dropdown-menu dropdown-menu-end shadow border-0 mt-2 p-2 rounded-3"
-                  aria-labelledby="userDropdown"
-                >
-                  <li>
-                    <Link
-                      className="dropdown-item rounded-2 py-2 d-flex align-items-center gap-2"
-                      to="/account"
-                    >
-                      <UserIcon size={14} /> Account Settings
-                    </Link>
-                  </li>
-                  <li>
-                    <Link
-                      className="dropdown-item rounded-2 py-2 d-flex align-items-center gap-2"
-                      to="/orders"
-                    >
-                      <ClipboardList size={14} /> My Orders
-                    </Link>
-                  </li>
-                  <li>
-                    <hr className="dropdown-divider" />
-                  </li>
-                  <li>
-                    <button
-                      className="dropdown-item text-danger rounded-2 py-2 d-flex align-items-center gap-2"
-                      onClick={handleLogout}
-                    >
-                      <LogOut size={14} /> Logout
-                    </button>
-                  </li>
-                </ul>
-              </div>
-            ) : (
-              <div className="d-flex gap-2">
-                <Link
-                  to="/login"
-                  className="btn btn-link text-decoration-none text-secondary fw-medium small px-3"
-                >
-                  Log In
-                </Link>
-                <Link
-                  to="/register"
-                  className="btn btn-premium px-3.5 py-2 small"
-                >
-                  Register
-                </Link>
-              </div>
-            )}
-          </div>
-        </div>
+    
+    <>
+    <nav className="bg-white flex md:justify-evenly justify-between z-10 sticky top-0">
+      {/* logo */}
+      <div className="flex items-center
+      ">
+        <img src={logo} alt="logo" className="md:h-20 md:w-20 w-15 h-15 rounded-2xl" />
+        <span className="text-2xl font-bold text-[#2b493c]">AyuDravya</span>
       </div>
+      {/* navlinks */}
+      <div className="md:flex gap-3 items-center hidden ">
+        <NavLink to={'/'}
+          className={({ isActive }) => `no-underline! text-gray-500! ${isActive ? "border border-green-900! text-green-900! px-3 py-2 rounded" : ''}`}
+        >Home</NavLink>
+        <NavLink to={'/products'}
+          className={({ isActive }) => `no-underline! text-gray-500! ${isActive ? "border border-green-900! text-green-900!  px-3 py-2 rounded" : ''}`}
+        >Show Product</NavLink>
+        <NavLink to={'/about'}
+          className={({ isActive }) => `no-underline! text-gray-500! ${isActive ? "border border-green-900! text-green-900!  px-3 py-2 rounded" : ''}`}
+        >About</NavLink>
+        {
+          user && <NavLink to={'/orders'}
+            className={({ isActive }) => `no-underline! text-gray-500! ${isActive ? "border border-green-900! text-green-900!  px-3 py-2 rounded" : ''}`}
+          >My Orders</NavLink>
+        }
+      </div>
+      {/* carts and login btns */}
+      <div className="md:flex items-center gap-4 hidden">
+        <div>
+          <FaCartShopping className="md:h-8 md:w-8 text-[#2C4A3E] inline-block relative" onClick={redirectToCart} />
+          {
+            cartCount > 0 && <span className=" text-xl absolute top-2 font-semibold text-gray-600">{cartCount}</span>
+          }
+        </div>
+        {
+          user ?
+            <button className="rounded  bg-[#2C4A3E] text-white p-2"
+              onClick={handleLogout}>Logout</button>
+            : <>
+              <Link to="/login" className="no-underline! text-gray-500! hover:text-[#2C4A3E] ">Login</Link>
+              <Link to="/register" className="no-underline! px-3 py-2 bg-[#2C4A3E] text-white ">Register</Link>
+            </>
+
+        }
+      </div>
+      <div>
+
+        {/* MOBILE VIEW  */}
+
+        {
+          isOpen ? <RxCross1 className="md:hidden text-[#2C4A3E] text-4xl font-semibold text-center" onClick={()=>{setIsOpen(!isOpen)}} />:
+            <RxHamburgerMenu className="md:hidden text-[#2C4A3E] text-4xl font-semibold" onClick={()=>{setIsOpen(!isOpen)}}/> 
+           
+        }
+
+
+      </div>
+     
+
+
+{/* mobile options
+ */}
+      
     </nav>
+     <div className={` flex flex-col gap-4 m-3 ${isOpen ? 'block':'hidden'} `}>
+        <NavLink to={'/'}
+          className={({ isActive }) => `no-underline! text-gray-500! ${isActive ? "border border-green-900! text-green-900! px-3 py-2 rounded" : ''}`}
+        >Home</NavLink>
+        <NavLink to={'/products'}
+          className={({ isActive }) => `no-underline! text-gray-500! ${isActive ? "border border-green-900! text-green-900!  px-3 py-2 rounded" : ''}`}
+        >Show Product</NavLink>
+        <NavLink to={'/about'}
+          className={({ isActive }) => `no-underline! text-gray-500! ${isActive ? "border border-green-900! text-green-900!  px-3 py-2 rounded" : ''}`}
+        >About</NavLink>
+        {
+          user && <NavLink to={'/orders'}
+            className={({ isActive }) => `no-underline! text-gray-500! ${isActive ? "border border-green-900! text-green-900!  px-3 py-2 rounded" : ''}`}
+          >My Orders</NavLink>
+        }
+        <div>
+          <FaCartShopping className="md:h-8 md:w-8 text-[#2C4A3E] inline-block relative" onClick={redirectToCart} />
+          {
+            cartCount > 0 && <span className=" text-xl absolute top-2 font-semibold text-gray-600">{cartCount}</span>
+          }
+        </div>
+        {
+          user ?
+            <button className="rounded  bg-[#2C4A3E] text-white p-2"
+              onClick={handleLogout}>Logout</button>
+            : <>
+              <Link to="/login" className="no-underline! text-gray-500! hover:text-[#2C4A3E] ">Login</Link>
+              <Link to="/register" className="no-underline! text-gray-500!">Register</Link>
+            </>
+
+        }
+      </div>
+    </>
   );
 };
