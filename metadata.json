@@ -1,0 +1,6 @@
+{
+  "name": "Premium Healthcare Shop",
+  "description": "A premium, focused 2-product healthcare and pharmacy ecommerce store built with React and Bootstrap.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
